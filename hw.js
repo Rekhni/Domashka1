@@ -9,22 +9,22 @@
 
 // 2 Задание
 
-// let firstIphoneDate = 2007;
+// const firstIphoneDate = 2007;
 // alert(`Дата выпуска первого Айфона: ${firstIphoneDate}`);
 
 ////////////////////////////////////////////
 
 // 3 Задание
 
-// let jsCreator = "Brendan Eich";
+// const jsCreator = "Brendan Eich";
 // alert(`Создателем языка JavaScript является ${jsCreator}`)
 
 ////////////////////////////////////////////
 
 // 4 Задание
 
-// let num1 = 10;
-// let num2 = 2;
+// const num1 = 10;
+// const num2 = 2;
 
 // sumRes = num1 + num2;
 // diffRes = num1 - num2;
@@ -40,15 +40,15 @@
 
 // 5 Задание
 
-// let result = 2 ** 5
+// const result = 2 ** 5
 // alert(`2 в 5-й степени будет ${result}`);
 
 /////////////////////////////////////////////
 
 // 6 Задание
 
-// let a = 9;
-// let b = 2;
+// const a = 9;
+// const b = 2;
 // let result = a % b;
 
 // alert(`Остаток от деления ${a} на ${b} будет ${result}`)
@@ -62,8 +62,8 @@
 // num -= 3;
 // num *= 7;
 // num /= 3;
-// num += 1;
-// num -= 1;
+// num++;
+// num--;
 // alert(`Окончательный ответ будет ${num}`);
 
 ///////////////////////////////////////////////
@@ -118,4 +118,5 @@
 // 10 Задание
 
 // let clientName = prompt("Введите имя");
-// alert(`Привет, ${clientName}!`);
+// alert(`Привет, ${clientName.toUpperCase()}!`);
+
