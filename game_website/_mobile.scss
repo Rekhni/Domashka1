@@ -1,0 +1,97 @@
+    @media (max-width: 767px) {
+        .center {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+
+        .main {
+            height: 735px;
+
+            &__content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        .main__title {
+            font-size: 32px;
+            line-height: 39px;
+            width: 343px;
+            text-align: center;
+        }
+
+        .main__text {
+            font-size: 14px;
+            line-height: 22px;
+            width: 343px;
+            text-align: center;
+        }
+
+        .main__button {
+            margin-left: 54px;
+            margin-right: 54px;
+        }
+
+        .choices {
+            height: 1221px;
+        }
+
+        
+        .choices__content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .first__game {
+            height: 653.61px;
+            display: flex;
+            flex-direction: column;
+            gap: 100px;
+            text-align: center;
+            justify-content: center;
+
+
+            &_content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 51px;
+            }
+        }
+
+        .game__title {
+            font-size: 32px;
+            line-height: 39px;
+        }
+
+        .game__text {
+            font-size: 14px;
+            line-height: 22px;
+            width: 343px;
+        }
+
+        .game__img img {
+            width: 344px;
+            height: 236px;
+
+        }
+
+        .second__game {
+            height: 653.61px;
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 100px;
+            text-align: center;
+            justify-content: center;
+
+
+            &_content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 51px;
+            }
+        }
+
+    }
