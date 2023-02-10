@@ -2,12 +2,13 @@
 
 // const arr = [1, 5, 4, 10, 0, 3];
 
-// for (let i = 0; i <= arr[3]; i++) {
-//     if (arr[i] === arr[4]) {
+// for (let i = 0; i < arr.length; i++) {
+//     if (arr[i] === 10) {
+//         console.log(arr[i]);
 //         break;
 //     }
 //     console.log(arr[i]);
-// }   
+// }
 
 ///////////////////////////////////////////
 
@@ -15,11 +16,8 @@
 
 // const arr = [1, 5, 4, 10, 0, 3];
 
-// for (let i = 0; i < arr.length; i++) {
-//     if (arr[i] === 4) {
-//         console.log(`4 находится под индексом ${i}`);
-//     }
-// }
+// console.log(arr.indexOf(4));
+
 
 ///////////////////////////////////////////
 
@@ -42,9 +40,7 @@
 //     arr.push(Math.floor(Math.random() * 10));
 //     if (arr[i] % 2 == 0) {
 //         newArr.push(arr[i]);
-//     } else {
-//         continue;
-//     }
+//     } 
 // }
 
 // console.log(arr);
@@ -55,12 +51,12 @@
 // 5 задание
 
 // let bigArr = [];
+// num = 0;
 
 // for (let i = 0; i <= 2; i++) {
 //         smallArr = [];
-//         for (let j = 0; j < 3; j++){
-//             randNum = Math.floor(Math.random() * 10);
-//             smallArr.push(randNum);
+//         for (let j = 0; j < 3; j++) {
+//             smallArr.push(1);
 //         }
 //     bigArr.push(smallArr);
 // }
@@ -73,7 +69,7 @@
 
 // let arr = [1, 1, 1];
 
-// arr = arr.concat([2, 2, 2]);
+// arr.push(2, 2, 2); 
 // console.log(arr);
 
 ///////////////////////////////////////////
@@ -104,12 +100,9 @@
 
 // string = 'abcdef';
 
-// arrString = string.split('');
+// reversedString = string.split('').reverse().join('');
 
-// revArrString = arrString.reverse();
-
-// revString = revArrString.join('');
-// console.log(revString);
+// console.log(reversedString);
 
 ///////////////////////////////////////////
 
@@ -119,13 +112,13 @@
 // let sum = 0
 
 // for (let i = 0; i < 6; i++) {
-//     randNum = Math.floor(Math.random() * 10);
+//     randNum = Math.floor(Math.random() * (10 - 1)) + 1;
 //     arr.push(randNum);
 //     sum += randNum;
 // }
 
 // console.log(arr);
-// let averageNum = Math.floor(sum / arr.length);
+// let averageNum = Math.round(sum / arr.length);
 // console.log(averageNum);
 
 ///////////////////////////////////////////
@@ -134,6 +127,7 @@
 
 // let arr = [[1, 2, 3], [4, 5, 6]];
 
+// console.log(arr.flat());
 // let newArr = [];
 
 // for (let minArr of arr) {
@@ -151,7 +145,7 @@
 // let arr = [];
 
 // for (let i = 0; i < 6; i++) {
-//     randNum = Math.floor(Math.random() * 10);
+//     randNum = Math.floor(Math.random() * (10 - 1)) + 1;
 //     arr.push(randNum);
 // }
 // console.log(arr);
