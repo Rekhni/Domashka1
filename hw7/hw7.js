@@ -125,13 +125,14 @@
 //     console.log('Звоню!')
 // };
 
-// function beeps() {
+// function beeps(callback) {
 //     setTimeout(() => {
 //         console.log('Идут гудки...')
 //     }, 1000);
+//     callback();
 // }
 
-// function talk(callback) {
+// function talk() {
 //     setTimeout(() => {
 //         console.log('Разговор')
 //     }, 2000);
@@ -139,7 +140,6 @@
 // }
 
 // calling();
-// beeps();
-// talk();
+// beeps(talk);
 
 ///////////////////////////////////////////////////////////////
