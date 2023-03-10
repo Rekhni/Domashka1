@@ -77,4 +77,23 @@
 
         }
 
+
+        .second__game {
+            height: 653.61px;
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 100px;
+            text-align: center;
+            justify-content: center;
+
+
+            &_content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 51px;
+            }
+        }
+
+
     }

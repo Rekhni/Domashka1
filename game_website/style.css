@@ -163,6 +163,24 @@ a {
   height: 333px;
 }
 
+
+.second__game {
+  height: 800px;
+  background-image: url(img/background_firstgame.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  gap: 135px;
+  align-items: center;
+}
+.second__game_content {
+  gap: 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+
 @media (max-width: 767px) {
   .center {
     padding-left: 16px;
@@ -226,4 +244,20 @@ a {
     width: 344px;
     height: 236px;
   }
+
+  .second__game {
+    height: 653.61px;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 100px;
+    text-align: center;
+    justify-content: center;
+  }
+  .second__game_content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 51px;
+  }
+
 }/*# sourceMappingURL=style.css.map */

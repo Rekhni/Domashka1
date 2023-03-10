@@ -180,6 +180,25 @@ a {
 }
 
 
+.second__game {
+    height: 800px;
+    background-image: url(img/background_firstgame.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    gap: 135px;
+    align-items: center;
+
+    &_content {
+        gap: 32px;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+
+
 @import 'mobile';
 
 
