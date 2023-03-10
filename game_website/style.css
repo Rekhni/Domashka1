@@ -163,6 +163,7 @@ a {
   height: 333px;
 }
 
+
 .second__game {
   height: 800px;
   background-image: url(img/background_firstgame.jpg);
@@ -178,6 +179,7 @@ a {
   display: flex;
   flex-direction: column;
 }
+
 
 @media (max-width: 767px) {
   .center {
@@ -242,6 +244,7 @@ a {
     width: 344px;
     height: 236px;
   }
+
   .second__game {
     height: 653.61px;
     display: flex;
@@ -256,4 +259,5 @@ a {
     align-items: center;
     margin-top: 51px;
   }
+
 }/*# sourceMappingURL=style.css.map */
