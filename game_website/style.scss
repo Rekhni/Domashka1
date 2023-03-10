@@ -1,0 +1,206 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+a {
+    text-decoration: none;
+}
+
+.center {
+    padding-left: calc(50% - 600px);
+    padding-right: calc(50% - 600px);
+  }
+
+.main {
+    height: 1024px;
+    background-image: url(img/game_main.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    &__content {
+        padding-top: 217px;
+        padding-bottom: 493px;
+    }
+
+    &__title {
+        font-weight: 700;
+        font-size: 64px;
+        line-height: 78px;
+        display: flex;
+        align-items: center;
+        color: #FFFFFF;
+        width: 788.78px;
+    }
+
+    &__text {
+        width: 500px;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 18px;
+        line-height: 32px;
+        align-items: center;
+        color: #FFFFFF;
+        padding-top: 32px;
+        padding-bottom: 44px;
+    }
+
+    &__button {
+        color: #FFFFFF;
+        width: 234.06px;
+        height: 48.6px;
+        background: #9C0332;
+        border-radius: 30px;
+        box-sizing: border-box;
+        border-color: #9C0332;
+
+        &:hover {
+            background: #EB443F;
+            border-color: #EB443F;
+            transition: all 0.5s;
+        }
+        
+    }
+}
+
+
+.choices {
+    height: 556px;
+    background-image: url(img/choices_img.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    &__content {
+        gap: 32px;
+        display: grid;
+        grid-template-columns: repeat(3, 378px);
+    }
+
+    &__item {
+        height: 300px;
+        display: flex;
+        align-items: flex-end;
+        background: linear-gradient(180deg, rgba(39, 1, 15, 0) 0%, #001944 100%), url(0023.jpg);
+        border-radius: 17px;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 32px;
+        color: #FFFFFF;
+        padding-left: 32px;
+        padding-bottom: 32px;
+
+        &:hover {
+            border: 3px solid #44D2FF;
+            transform: scale(1.01);
+            transition: all 0.5s;
+        }
+
+        &_1 {
+            background-image: url(img/choice1.jpg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+
+        &_2 {
+            background-image: url(img/choice2.jpg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+
+        &_3 {
+            background-image: url(img/choice3.jpg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+    } 
+}
+
+.first__game {
+    height: 800px;
+    background-image: url(img/background_firstgame.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    gap: 135px;
+    align-items: center;
+
+    &_content {
+        gap: 32px;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.game__title {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 59px;
+    color: #FFFFFF;
+}
+
+.game__text {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    color: #FFFFFF;
+    width: 584px;
+}
+
+.game__button {
+    color: #FFFFFF;
+    width: 234.06px;
+    height: 48.6px;
+    background: #9C0332;
+    border-radius: 30px;
+    box-sizing: border-box;
+    border-color: #9C0332;
+
+    &:hover {
+        background: #EB443F;
+        border-color: #EB443F;
+        transition: all 0.5s;
+    }
+}
+
+.game__img {
+    width: 485px;
+    height: 333px;
+}
+
+.second__game {
+    height: 800px;
+    background-image: url(img/background_firstgame.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    gap: 135px;
+    align-items: center;
+
+    &_content {
+        gap: 32px;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+
+@import 'mobile';
+
+
+
+
+
+
