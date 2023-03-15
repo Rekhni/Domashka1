@@ -3,7 +3,6 @@ const commentsElement = document.getElementById('comments');
 const nameInputElement = document.getElementById('name-input');
 const commentInputElement = document.getElementById('comment-input');
 const dateInputElement = document.getElementById('date-input');
-
 const deleteButtonElement = document.getElementById('delete-button');
 
 
@@ -14,6 +13,8 @@ const comments = [
         commentary: "Это будет первый комментарий на этой странице",
         likes: 3,
         liked: false,
+        isEdit: false,
+        editButtonText: ['Редактировать', 'Сохранить'],
     },
     {
         name: "Варвара",
@@ -21,8 +22,11 @@ const comments = [
         commentary: " Мне нравится как оформлена эта страница! ❤",
         likes: 75,
         liked: true,
+        isEdit: false,
+        editButtonText: ['Редактировать', 'Сохранить'],
     },
 ];
+
 
 const renderComments = () => {
     const commentsHtml = comments.map((comment, index) => {
@@ -32,9 +36,10 @@ const renderComments = () => {
                     <div id="date-input">${comment.date}</div>
                 </div>
                 <div class="comment-body">
-                    <div class="comment-text">
-                        ${comment.commentary}
+                    <div class="comment-text" data-index="${index}">
+                        ${comment.isEdit ? `<textarea type="textarea" class="add-form-text" rows="4" cols="49">${comment.commentary}</textarea>` : quote(comment.commentary)}
                     </div>
+                    <button data-index="${index}" class="edit-button" id="edit-button">${comment.isEdit ? comment.editButtonText[1] : comment.editButtonText[0]}</button>
                 </div>
                 <div class="comment-footer">
                     <div class="likes">
@@ -45,18 +50,47 @@ const renderComments = () => {
             </li>`;
     }).join("");
 
-    console.log(commentsHtml);
+    // console.log(commentsHtml);
 
     commentsElement.innerHTML = commentsHtml;
 
     changeLikesListener();
+
+    commentResponseListener();
+
+    changeCommentListener();
+};
+
+function safeInputText(str) {
+  return str.replaceAll("<", "&lt;").replaceAll(">", "&gt;")
+
+}
+
+function quote(a) {
+  return a.replaceAll('QUOTE_BEGIN', '<blockquote class="blockquote">')
+    .replaceAll('QUOTE_END', '</blockquote>');
+}
+
+const commentResponseListener = () => {
+  const responseButtonsElements = document.querySelectorAll('.comment-text');
+
+  for (const responseButton of responseButtonsElements) {
+    responseButton.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const index = responseButton.dataset.index;
+      commentInputElement.value = 'QUOTE_BEGIN' + comments[index].name + ':' + '\n' +
+        '>' + comments[index].commentary + 'QUOTE_END'; 
+      renderComments();
+    });
+  }
 };
 
 const changeLikesListener = () => {
     const likeButtonsElements = document.querySelectorAll('.like-button');
 
     for (const likeButtonElement of likeButtonsElements) {
-      likeButtonElement.addEventListener('click', () => {
+      likeButtonElement.addEventListener('click', (event) => {
+        event.stopPropagation()
         const index = likeButtonElement.dataset.index;
 
         if (comments[index].liked === false) {
@@ -70,9 +104,9 @@ const changeLikesListener = () => {
         renderComments();
       })
     }
+    
 
-
-
+  };
     
     // for (const likeButtonElement of likeButtonsElements) {
     //     likeButtonElement.addEventListener('click', () => {
@@ -90,6 +124,39 @@ const changeLikesListener = () => {
             
         
     
+
+
+const changeCommentListener = (event) => {
+  const editButtonsElements = document.querySelectorAll('.edit-button');
+
+  for (let editButtonElement of editButtonsElements) {
+    editButtonElement.addEventListener('click', (event) => {
+      event.stopPropagation()
+      const index = editButtonElement.dataset.index;
+
+      if (!comments[index].isEdit) {
+        comments[index].isEdit = true;
+      }  else {
+          let currentTextarea = document.querySelectorAll('.comment')[index].querySelector('textarea');
+          if (currentTextarea.value !== '') {
+            comments[index].isEdit = false;
+            comments[index].commentary = safeInputText(currentTextarea.value);
+          }
+      };
+
+      renderComments();
+
+    });
+
+  }
+
+  const allTextareas = document.querySelectorAll('textarea');
+  
+  for (let textarea of allTextareas) {
+    textarea.addEventListener('click', (event) => {
+      event.stopPropagation()
+    });
+  }
 };
 
 
@@ -150,11 +217,13 @@ buttonElement.addEventListener("click", () => {
 
 
     comments.push({
-        name: nameInputElement.value,
+        name: safeInputText(nameInputElement.value),
         date: currentDateString,
-        commentary: commentInputElement.value,
+        commentary: safeInputText(commentInputElement.value),
         likes: 0,
         liked: false,
+        isEdit: false,
+        editButtonText: ['Редактировать', 'Сохранить'],
     });
 
     nameInputElement.value = "";
