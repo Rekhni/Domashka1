@@ -75,7 +75,8 @@ const commentResponseListener = () => {
   const responseButtonsElements = document.querySelectorAll('.comment-text');
 
   for (const responseButton of responseButtonsElements) {
-    responseButton.addEventListener('click', () => {
+    responseButton.addEventListener('click', (event) => {
+      event.stopPropagation();
       const index = responseButton.dataset.index;
       commentInputElement.value = 'QUOTE_BEGIN' + comments[index].name + ':' + '\n' +
         '>' + comments[index].commentary + 'QUOTE_END'; 
@@ -147,6 +148,14 @@ const changeCommentListener = (event) => {
 
     });
 
+  }
+
+  const allTextareas = document.querySelectorAll('textarea');
+  
+  for (let textarea of allTextareas) {
+    textarea.addEventListener('click', (event) => {
+      event.stopPropagation()
+    });
   }
 };
 
