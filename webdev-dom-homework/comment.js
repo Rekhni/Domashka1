@@ -3,29 +3,70 @@ const commentsElement = document.getElementById('comments');
 const nameInputElement = document.getElementById('name-input');
 const commentInputElement = document.getElementById('comment-input');
 const dateInputElement = document.getElementById('date-input');
-const deleteButtonElement = document.getElementById('delete-button');
+
+let comments = [];
+
+const fetchPromise = fetch("https://webdev-hw-api.vercel.app/api/v1/Reha/comments", {
+  method: "GET",
+});
+
+fetchPromise.then((response) => {
+  // Запускаем преобразовываем "сырые" данные от API в json формат
+  response.json().then((responseData) => {
+    // получили данные и рендерим их в приложении
+    const appComments = responseData.comments.map((comment) => {
+      return {
+        name: comment.author.name,
+        date: currentDateString(comment.date),
+        text: comment.text,
+        likes: comment.likes,
+        isLiked: false,
+      };
+    });
+
+    comments = appComments;
+    renderComments();
+  });
+});
+
+const currentDateString = () => {
+
+  const currentDate = new Date;
+  const dateFormat = {
+      year: '2-digit',
+      month: 'numeric',
+      day: 'numeric',
+    }
+  const timeFormat = {
+      hour: '2-digit',
+      minute: '2-digit',
+    }
+
+    return currentDate.toLocaleDateString('ru-RU', dateFormat) +
+    ' ' + currentDate.toLocaleTimeString('ru-RU', timeFormat);
+} 
 
 
-const comments = [
-    {
-        name: "Глеб Фокин",
-        date: "12.02.22 12:18",
-        commentary: "Это будет первый комментарий на этой странице",
-        likes: 3,
-        liked: false,
-        isEdit: false,
-        editButtonText: ['Редактировать', 'Сохранить'],
-    },
-    {
-        name: "Варвара",
-        date: "03.02.22 19:22",
-        commentary: " Мне нравится как оформлена эта страница! ❤",
-        likes: 75,
-        liked: true,
-        isEdit: false,
-        editButtonText: ['Редактировать', 'Сохранить'],
-    },
-];
+// const comments = [
+//     {
+//         name: "Micheal Scott",
+//         date: "12.02.22 12:18",
+//         commentary: "This will be my first comment",
+//         likes: 3,
+//         liked: false,
+//         isEdit: false,
+//         editButtonText: ['Edit', 'Save'],
+//     },
+//     {
+//         name: "Chris Brown", 
+//         date: "03.02.22 19:22",
+//         commentary: " I like how this page is designed! ❤",
+//         likes: 75,
+//         liked: true,
+//         isEdit: false,
+//         editButtonText: ['Edit', 'Save'],
+//     },
+// ];
 
 
 const renderComments = () => {
@@ -37,9 +78,8 @@ const renderComments = () => {
                 </div>
                 <div class="comment-body">
                     <div class="comment-text" data-index="${index}">
-                        ${comment.isEdit ? `<textarea type="textarea" class="add-form-text" rows="4" cols="49">${comment.commentary}</textarea>` : quote(comment.commentary)}
+                        ${comment.isEdit ? `<textarea type="textarea" class="add-form-text" rows="4" cols="49">${comment.text}</textarea>` : quote(comment.text)}
                     </div>
-                    <button data-index="${index}" class="edit-button" id="edit-button">${comment.isEdit ? comment.editButtonText[1] : comment.editButtonText[0]}</button>
                 </div>
                 <div class="comment-footer">
                     <div class="likes">
@@ -56,6 +96,8 @@ const renderComments = () => {
 
     changeLikesListener();
 
+    initDeleteButtonsListeners();
+
     commentResponseListener();
 
     changeCommentListener();
@@ -70,6 +112,19 @@ function quote(a) {
   return a.replaceAll('QUOTE_BEGIN', '<blockquote class="blockquote">')
     .replaceAll('QUOTE_END', '</blockquote>');
 }
+
+const initDeleteButtonsListeners = () => {
+  const deleteButtonsElements = document.querySelectorAll(".delete-button");
+
+  for (const deleteButtonElement of deleteButtonsElements) {
+      deleteButtonElement.addEventListener('click', (event) => {
+          event.stopPropagation();
+          const index = deleteButtonElement.dataset.index;
+          comments.splice(index, 1);
+          renderComments();
+      });
+  } 
+};
 
 const commentResponseListener = () => {
   const responseButtonsElements = document.querySelectorAll('.comment-text');
@@ -93,12 +148,12 @@ const changeLikesListener = () => {
         event.stopPropagation()
         const index = likeButtonElement.dataset.index;
 
-        if (comments[index].liked === false) {
-          comments[index].liked = true;
-          comments[index].likes += 1;
-        } else {
+        if (comments[index].liked === true) {
           comments[index].liked = false;
           comments[index].likes -= 1;
+        } else {
+          comments[index].liked = true;
+          comments[index].likes += 1;
         };
 
         renderComments();
@@ -179,19 +234,10 @@ buttonElement.addEventListener("click", () => {
         return;
       }
 
-        const currentDate = new Date;
-        const dateFormat = {
-            year: '2-digit',
-            month: 'numeric',
-            day: 'numeric',
-          }
-        const timeFormat = {
-            hour: '2-digit',
-            minute: '2-digit',
-          }
-      
-      const currentDateString = currentDate.toLocaleDateString('ru-RU', dateFormat) +
-            ' ' + currentDate.toLocaleTimeString('ru-RU', timeFormat);
+
+
+
+
     // const date = new Date();
 
     // let year = date.getFullYear();
@@ -216,15 +262,41 @@ buttonElement.addEventListener("click", () => {
     // const currentDate = day + '.' + month + '.' + year + '  ' + hour + ':' + minute;
 
 
-    comments.push({
-        name: safeInputText(nameInputElement.value),
-        date: currentDateString,
-        commentary: safeInputText(commentInputElement.value),
-        likes: 0,
-        liked: false,
-        isEdit: false,
-        editButtonText: ['Редактировать', 'Сохранить'],
-    });
+    // comments.push({
+    //     name: safeInputText(nameInputElement.value),
+    //     date: currentDateString,
+    //     commentary: safeInputText(commentInputElement.value),
+    //     likes: 0,
+    //     liked: false,
+    //     isEdit: false,
+    //     editButtonText: ['Edit', 'Save'],
+    // });
+
+    if (commentInputElement.value === "") {
+      return;
+    }
+
+    // подписываемся на успешное завершение запроса с помощью then
+    fetch("https://webdev-hw-api.vercel.app/api/v1/Reha/comments", {
+      method: "POST",
+      body: JSON.stringify({
+        name: nameInputElement.value,
+        date: currentDateString(),
+        text: commentInputElement.value,
+        likes: 5,
+        isLiked: false,
+      })
+    }).then(() => {
+        fetch("https://webdev-hw-api.vercel.app/api/v1/Reha/comments", {
+          method: "GET",
+        }).then((res) => {
+          res.json().then((afterResult) => {
+            // получили данные и рендерим их в приложении
+            comments = afterResult.comments;
+            renderComments();
+          });
+        });
+    })
 
     nameInputElement.value = "";
     commentInputElement.value = "";
@@ -263,9 +335,7 @@ buttonElement.addEventListener("click", () => {
 
   });
 
-  deleteButtonElement.addEventListener("click", () => {
-    commentsElement.removeChild(commentsElement.lastElementChild);
-  })
+
 
 
 
