@@ -251,7 +251,7 @@ function addComment() {
     commentInputElement.placeholder = 'Введите ваш комментарий';
   }
 
-  if (inputName.value === '') {
+  if (nameInputElement.value === '') {
     nameInputElement.classList.add('error__name');
     nameInputElement.placeholder = 'Поле не может быть пустым!';
     commentInputElement.value = '';
@@ -275,7 +275,7 @@ function addComment() {
           isLiked: false, 
           text: safeInputText(commentInputElement.value),
           name: safeInputText(nameInputElement.value),
-          
+
         })
       })
         .then(response => {
