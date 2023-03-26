@@ -192,6 +192,14 @@ body {
     opacity: 0.9;
   }
 
+  .error__name {
+    background-color: rgba(255, 0, 0, 0.5);
+  }
+  
+  .error__name::placeholder {
+    color: #ffffff;
+  }
+  
   .blockquote {
     padding: 15px;
     font-size: 16px;
@@ -219,4 +227,58 @@ body {
     animation: dash 1.5s ease-in-out infinite;
   }
 
+  @keyframes rotate {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes dash {
+    0% {
+      stroke-dasharray: 1, 150;
+      stroke-dashoffset: 0;
+    }
+    50% {
+      stroke-dasharray: 90, 150;
+      stroke-dashoffset: -35;
+    }
+    100% {
+      stroke-dasharray: 90, 150;
+      stroke-dashoffset: -124;
+    }
+  }
+
+  @keyframes rotating {
+    from {
+      transform: scale(1.0);
+    }
+    12.5% {
+      transform: scale(1.07);
+    }
+    25% {
+      transform:scale(0.87);
+    }
+    37.5% {
+      transform:scale(1.07);
+    }
+    50% {
+      transform:scale(0.87);
+    }
+    62.5% {
+      transform:scale(1.07);
+    }
+    75% {
+      transform:scale(0.87);
+    }
+    87.5% {
+      transform:scale(1.07);
+    }
+    to {
+      transform:scale(1.0);
+    }
+  }
+
+  .loading-like {
+    animation: rotating 1s ease-in-out infinite;
+  }
   
