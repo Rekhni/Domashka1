@@ -1,6 +1,3 @@
-// const buttonElement = document.getElementById('add-button');
-// const commentsElement = document.getElementById('comments');
-// const dateInputElement = document.getElementById('date-input');
 
 let comments = [];
 renderComments(1);
@@ -8,11 +5,29 @@ renderComments(1);
 function getComment() {
 
     return fetch("https://webdev-hw-api.vercel.app/api/v1/Reha/comments")
-      .then(response => response.json())
-      .then(responseData => {
+      .then((response) => {
+        console.log(response);
+        if (response.status === 200) {
+          return response.json();
+        }
+        if (response.status === 500) {
+          throw new Error('Server is broken'); 
+        }
+      })
+      .then((responseData) => {
         comments = responseData.comments;
         renderComments();
-      });
+      })
+      .catch((error) => {
+        if (error.message === 'Server is broken') {
+          alert('Сервер сломался, попробуй позже');
+          return;
+        }
+        if (error.message === 'Failed to fetch') {
+          alert('Кажется, у вас сломался интернет, попробуйте позже');
+          return;
+        }
+      })
 }
 
 getComment();
@@ -31,29 +46,6 @@ const currentDateString = (date) => {
     const newDate = new Date(date); 
     return newDate.toLocaleDateString('ru-RU', options).replace(',', '');
 } 
-
-
-// const comments = [
-//     {
-//         name: "Micheal Scott",
-//         date: "12.02.22 12:18",
-//         commentary: "This will be my first comment",
-//         likes: 3,
-//         liked: false,
-//         isEdit: false,
-//         editButtonText: ['Edit', 'Save'],
-//     },
-//     {
-//         name: "Chris Brown", 
-//         date: "03.02.22 19:22",
-//         commentary: " I like how this page is designed! ❤",
-//         likes: 75,
-//         liked: true,
-//         isEdit: false,
-//         editButtonText: ['Edit', 'Save'],
-//     },
-// ];
-
 
 function renderComments(isFirstOpen = 0) {
     const commentsList = document.querySelector('ul.comments')
@@ -264,34 +256,74 @@ function addComment() {
     setTimeout(clearInputs, 1500);
 
   } else {
+      const currentComment = commentInputElement.value;
+      const currentName = nameInputElement.value;
       // подписываемся на успешное завершение запроса с помощью then
       renderForm(1);
-
-      fetch("https://webdev-hw-api.vercel.app/api/v1/Reha/comments", {
-        method: "POST",
-        body: JSON.stringify({
-          date: currentDate,
-          likes: 0,
-          isLiked: false, 
-          text: safeInputText(commentInputElement.value),
-          name: safeInputText(nameInputElement.value),
-
+      function postComment() {
+        fetch("https://webdev-hw-api.vercel.app/api/v1/Reha/comments", {
+          method: "POST",
+          body: JSON.stringify({
+            date: currentDate,
+            likes: 0,
+            isLiked: false, 
+            text: safeInputText(commentInputElement.value),
+            name: safeInputText(nameInputElement.value),
+            forceError: true,
+          })
         })
-      })
-        .then(response => {
-          response.json().then(message => console.log(message));
-          renderForm(2);
-          return getComment();
-        })
-        .then((responseData) => {
-          console.log(responseData);
-          renderForm();
-        });
+          .then(response => {
+            if (response.status === 201) {
+              response.json().then(message => console.log(message));
+              renderForm(2);
+              return getComment();
+            }
 
-        // renderComments();
+            if (response.status === 400) {
+              throw new Error('Short name or comment');
+            }
 
-        nameInputElement.value = "";
-        commentInputElement.value = "";
+            if (response.status === 500) {
+              console.warn('Server is broken');
+              postComment();
+              throw new Error('Server is broken');
+            }
+
+          })
+          .then((responseData) => {
+            console.log(responseData);
+            renderForm();
+          })
+          .catch((error) => {
+            const restore = () => {
+              renderForm();
+              document.querySelector('input.add-form-name').value = currentName;
+              document.querySelector('.add-form-text').value = currentComment;
+            }
+
+            console.warn(error);
+            if (error.message === 'Short name or comment') {
+              alert('Что-то пошло не так:\n' +
+              'Имя или текст не должны быть короче 3 символов\n');
+            }
+
+            if (error.message === 'Server is broken') {
+              restore();
+            }
+            
+            if (error.message === 'Failed to fetch') {
+              alert('Кажется, у вас сломался интернет, попробуйте позже');
+              restore();
+            }
+          })
+
+          // renderComments();
+  
+          nameInputElement.value = "";
+          commentInputElement.value = "";
+      }
+      postComment();
+
   }
 
 }
