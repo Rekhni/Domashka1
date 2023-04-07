@@ -25,7 +25,7 @@ function renderAddForm(form = 'addForm') {
 
         case 'addForm': addFormElement.innerHTML = `    
     <div class="user-container">
-    <input type="text" class="add-form-name" placeholder="Введите ваше имя" id="input-name" style="display: inline-block" />
+    <input type="text" class="add-form-name" placeholder="Write your name" id="input-name" style="display: inline-block" />
     <a href=# class="logout-button">Exit</a>
     </div>
     <textarea type="textarea" class="add-form-text" placeholder="Write your comment" rows="4"

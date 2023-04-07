@@ -12,13 +12,13 @@ export function renderAuthForm({ setToken, setUser }) {
         </ul>
         <div class="auth-form add-form" id="auth-form">
             ${isLoginForm ? '' : `
-            <input type="text" class="auth-form-name" placeholder="Введите ваше имя" id="login-name">
+            <input type="text" class="auth-form-name" placeholder="Write your name" id="login-name">
             `}
-            <input type="text" class="auth-form-name" placeholder="Введите ваш логин" id="login-login">
-            <input type="password" class="auth-form-name" placeholder="Введите ваш пароль" id="login-password">
+            <input type="text" class="auth-form-name" placeholder="Write your login" id="login-login">
+            <input type="password" class="auth-form-name" placeholder="Write your password" id="login-password">
             
-            <button class="add-form-button" id="button-login">${isLoginForm ? 'Войти' : 'Зарегистрироваться'}</button>
-            <a class="anchor-buton" href=#>${isLoginForm ? 'Зарегистрироваться' : 'Войти'}</a>
+            <button class="add-form-button" id="button-login">${isLoginForm ? 'Sign in' : 'Register'}</button>
+            <a class="anchor-buton" href=#>${isLoginForm ? 'Register' : 'Sign in'}</a>
             
         </div>
             `
@@ -34,7 +34,7 @@ export function renderAuthForm({ setToken, setUser }) {
                 const loginInput = document.getElementById('login-login');
                 const passwordInput = document.getElementById('login-password');
 
-                if (validate(loginInput, 'ваш логин') && validate(passwordInput, 'ваш пароль')) {
+                if (validate(loginInput, 'your login') && validate(passwordInput, 'your password')) {
                     const login = loginInput.value;
                     const password = passwordInput.value;
                     loginUser({ login, password })
@@ -58,7 +58,7 @@ export function renderAuthForm({ setToken, setUser }) {
                 const nameInput = document.getElementById('login-name');
                 const loginInput = document.getElementById('login-login');
                 const passwordInput = document.getElementById('login-password');
-                if (validate(nameInput, 'ваше имя') && validate(loginInput, 'ваш логин') && validate(passwordInput, 'ваш пароль')) {
+                if (validate(nameInput, 'your name') && validate(loginInput, 'your login') && validate(passwordInput, 'your password')) {
                     const name = nameInput.value;
                     const login = loginInput.value;
                     const password = passwordInput.value;
